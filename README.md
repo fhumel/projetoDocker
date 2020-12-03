@@ -1,24 +1,60 @@
-# Lumen PHP Framework
+# Laradock
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://img.shields.io/packagist/v/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://img.shields.io/packagist/l/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
+Project made for testing the laravel framework with the docker in a transaction application.
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+  - UnitTest
+  - Docker
+  - Laravel
+  - PHP 7.4
+  
+### Requires
 
-## Official Documentation
+ - [Composer](https://getcomposer.org/download/)
+ - [Docker](https://docs.docker.com/engine/install/)
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+### Installation
 
-## Contributing
+Clone project https://github.com/fhumel/projetoDocker
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Install the dependencies of composer
 
-## Security Vulnerabilities
+```sh
+$ composer install
+$ chmod 777 -R storage
+$ ln -s public html
+```
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+For laravel...
+copy .env.example para .env and config ports and mysql
 
-## License
+For docker... 
+/laradock
+copy env-example para .env and config ports and mysql
 
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#### Building for source
+### Docker
+```sh
+php artisan migrate
+php artisan key:generate 
+```
+
+For production release:
+```sh
+$ cd laradock
+$ sudo docker-compose up -d nginx mysql phpmyadmin
+```
+
+Verify the deployment by navigating to your server address in your preferred browser.
+
+```sh
+127.0.0.1:8000
+```
+
+License
+----
+
+MIT
+
+
+**Free Software, Hell Yeah!**
+
