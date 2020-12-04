@@ -13,14 +13,14 @@ class CreateUserWallet extends Migration
      */
     public function up()
     {
-        Schema::table('carteira', function (Blueprint $table) {
+        Schema::table('wallet', function (Blueprint $table) {
             $table->id();
-            $table->decimal('dinheiro',9,3);
+            $table->decimal('money',9,3);
             $table->timestamps();
-            $table->foreign('usuarioUd')
+            $table->foreign('userId')
 //                ->constrained('users')
                 ->onDelete('cascade')
-                ->references('id')->on('usuario');
+                ->references('id')->on('user');
         });
     }
 

@@ -11,9 +11,9 @@ class Transaction extends Model
      *
      * @var array
      */
-    protected $table = [ 'transacao' ];
+    protected $table = [ 'transaction' ];
 
     protected $fillable = [
-        'pagador', 'beneficiario', 'valor',
+        'id', 'payer', 'payee', 'value',
     ];
 }

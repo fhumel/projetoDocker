@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Usuario;
+namespace App\Models\User;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +11,7 @@ class Conta extends Model
      *
      * @var array
      */
-    protected $table = [ 'carteira' ];
+    protected $table = [ 'wallet' ];
 
-    protected $fillable = [ 'tipo' ];
+    protected $fillable = [ 'id', 'tipo' ];
 }

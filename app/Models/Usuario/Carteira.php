@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Usuario;
+namespace App\Models\User;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,9 +11,9 @@ class Carteira extends Model
      *
      * @var array
      */
-    protected $table = [ 'carteira' ];
+    protected $table = [ 'wallet' ];
 
     protected $fillable = [
-        'usuarioId', 'dinheiro',
+        'id', 'userId', 'value',
     ];
 }

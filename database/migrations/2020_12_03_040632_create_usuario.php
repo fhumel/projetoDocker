@@ -13,17 +13,17 @@ class CreateUser extends Migration
      */
     public function up()
     {
-        Schema::table('usuario', function (Blueprint $table) {
+        Schema::table('user', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
+            $table->string('name');
             $table->string('cpf')->unique();
             $table->string('email')->unique();
-            $table->string('senha');
+            $table->string('password');
             $table->timestamps();
 
-            $table->foreign('contaId')
+            $table->foreign('accountId')
                 ->onDelete('cascade')
-                ->references('id')->on('conta');
+                ->references('id')->on('account');
         });
     }
 
@@ -34,6 +34,6 @@ class CreateUser extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('usuario');
+        Schema::dropIfExists('user');
     }
 }
