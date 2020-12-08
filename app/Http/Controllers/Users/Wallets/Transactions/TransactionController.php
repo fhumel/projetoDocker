@@ -35,6 +35,8 @@ class TransactionController extends Controller
             /** @var WalletEntity $entidade */
             $entidade = $this->transactionService->pay($dados);
 
+            dd($entidade);
+
             if ($entidade) {
                 //gerar um log de transaferencia
             }

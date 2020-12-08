@@ -7,6 +7,11 @@ use Illuminate\Support\Collection;
 
 interface UserRepositoryInterface
 {
+
+    public const COMUM = 1;
+
+    public const LOGISTA = 2;
+
     /**
      * @param array $dados
      * @return User

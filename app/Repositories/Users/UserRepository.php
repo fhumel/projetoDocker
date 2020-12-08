@@ -43,7 +43,9 @@ class UserRepository implements UserRepositoryInterface
      */
     public function create(array $dados): User
     {
+
         $user = User::create($dados);
+
 
         if (!$user) {
             throw new \Exception();

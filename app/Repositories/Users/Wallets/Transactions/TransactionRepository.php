@@ -24,10 +24,15 @@ class TransactionRepository implements TransactionRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function pay(array $dados): array
+    public function pay(array $dados): Transaction
     {
-        dd($dados);
-        //update wallet do payee adicionando valor
+        $transaction = Transaction::create($dados);
+
+        if (!$transaction) {
+            throw new \Exception();
+        }
+
+        return $transaction;
     }
 
 }

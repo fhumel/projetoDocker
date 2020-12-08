@@ -14,6 +14,10 @@ class UserService implements UserServiceInterface
 
     /** @var \App\Repositories\Users\UserRepositoryInterface */
     private $userRepository;
+    /**
+     * @var \App\Contracts\Users\Wallets\Repositories\WalletRepositoryInterface|\App\Repositories\Users\Wallets\WalletRepositoryInterface
+     */
+    private $walletRepository;
 
     /**
      * UsuarioService constructor.
@@ -36,11 +40,15 @@ class UserService implements UserServiceInterface
     {
 
         $dados['wallet']['money'] = 0;
-        $dados['wallet']['type'] = $dados['type'];
 
         $walletId = $this->walletRepository->create( $dados['wallet']);
 
-        $dados['wallet_id'] = $walletId;
+        $insertedId = $walletId->id;
+
+        $dados['wallet_id'] = $insertedId;
+
+        $dados['type'] = ($dados['type'] == 'logista' ? UserRepositoryInterface::LOGISTA : UserRepositoryInterface::COMUM);
+
 
         unset($dados['wallet']);
 

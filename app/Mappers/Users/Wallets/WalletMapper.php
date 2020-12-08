@@ -29,8 +29,7 @@ class WalletMapper implements WalletMapperInterface
         $walletEntity = clone $this->walletEntity;
         isset($dados['id']) ? $walletEntity->setId($dados['id']) : $walletEntity->setId(null);
         $walletEntity
-            ->setMoney($dados['money'])
-            ->setType($dados['type']);
+            ->setMoney($dados['money']);
         return $walletEntity;
     }
 
@@ -42,8 +41,7 @@ class WalletMapper implements WalletMapperInterface
     {
         return [
             'id' => $walletEntity->getId(),
-            'money' => $walletEntity->getMoney(),
-            'userId' => $walletEntity->getUserId()
+            'money' => $walletEntity->getMoney()
         ];
     }
 }
