@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Services\Wallets;
+namespace App\Services\Users\Wallets\Factories;
 
-use App\Repositories\Wallets\WalletRepositoryInterface;
-use App\Services\WalletService;
+use App\Contracts\Users\Wallets\Repositories\WalletRepositoryInterface;
+use App\Services\Users\Wallets\WalletService;
 
 class WalletServiceFactory
 {
     /**
-     * @return \Api\Services\Wallets\WalletService
+     * @return WalletService
      */
     public function __invoke()
     {
-        /** @var \Api\Repositories\Wallets\WalletRepositoryInterface $walletRepository */
+        /** @var WalletRepositoryInterface $walletRepository */
         $walletRepository = app(WalletRepositoryInterface::class);
 
-        return new WalletService(
+        return new  WalletService(
             $walletRepository
         );
     }

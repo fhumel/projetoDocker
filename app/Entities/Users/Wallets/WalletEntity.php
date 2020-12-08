@@ -1,17 +1,14 @@
 <?php
 
-namespace App\Entities\Wallets;
+namespace App\Entities\Users\Wallets;
 
-class WalletEntity extends DefaultEntity
+class WalletEntity
 {
     /** @var integer */
     private ?int $id = null;
 
-    /** @var integer */
-    private int $userId;
-
-    /** @var integer */
-    private int $money;
+    /** @var float */
+    private float $money;
 
     /** @var string */
     private string $type;
@@ -25,11 +22,13 @@ class WalletEntity extends DefaultEntity
     }
 
     /**
-     * @param string $type
+     * @param string|null $type
+     * @return WalletEntity
      */
-    public function setType(string $type): void
+    public function setType(?string $type): WalletEntity
     {
         $this->type = $type;
+        return $this;
     }
 
     /**
@@ -41,42 +40,30 @@ class WalletEntity extends DefaultEntity
     }
 
     /**
-     * @param int $id
+     * @param string|null $id
+     * @return UserEntity
      */
-    public function setId(int $id): void
+    public function setId(?string $id): WalletEntity
     {
         $this->id = $id;
+        return $this;
     }
 
     /**
-     * @return int
+     * @return float
      */
-    public function getUserId(): int
-    {
-        return $this->userId;
-    }
-
-    /**
-     * @param int $userId
-     */
-    public function setUserId(int $userId): void
-    {
-        $this->userId = $userId;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMoney(): int
+    public function getMoney(): float
     {
         return $this->money;
     }
 
     /**
-     * @param int $money
+     * @param float|null $money
+     * @return UserEntity
      */
-    public function setMoney(int $money): void
+    public function setMoney(?float $money): WalletEntity
     {
         $this->money = $money;
+        return $this;
     }
 }

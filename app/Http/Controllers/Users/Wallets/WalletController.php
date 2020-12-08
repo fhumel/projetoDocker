@@ -2,43 +2,47 @@
 
 namespace App\Http\Controllers\Users\Wallets;
 
-use App\Http\Requests\UserRequest;
+use App\Contracts\Users\Wallets\Services\WalletServiceInterface;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\Wallets\WalletRequest;
-use App\Services\TransferServiceInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
-class WalletController implements WalletControllerInterface
+class WalletController  extends Controller
 {
     /**
      * TransferController constructor.
      *
-     * @param \App\Services\TransferServiceInterface $walletService
+     * @param WalletServiceInterface $walletService
      */
     public function __construct(
-        TransferServiceInterface $walletService
+        WalletServiceInterface $walletService
     ) {
         $this->walletService = $walletService;
     }
 
     /**
-     * @param \App\Http\Requests\Transactions\Users\Wallet\WalletRequest $transactionRequest
-     * @return \Illuminate\Http\JsonResponse
+     * @param WalletRequest $transactionRequest
+     * @return JsonResponse
      */
-    public function despoit(WalletRequest $request): Illuminate\Http\JsonResponse
+    public function deposit(WalletRequest $request): JsonResponse
     {
 
         try {
-            $dados = $request->all();
+            $dados = $request->getParams()->all();
 
-            /** @var \App\Entities\TransferEntity $entidade */
-            $entidade = $this->walletService->despoit($dados);
+            /** @var WalletEntity $entidade */
+            $entidade = $this->walletService->deposit($dados);
+
+            if ($entidade) {
+                //gerar um log de transaferencia
+            }
 
             return response()->json(
                 [
                     "codigo" => Response::HTTP_CREATED,
-                    "descricao" => "Valor transferido com sucesso.",
+                    "descricao" => "Valor depositado com sucesso.",
+                    "money" => $entidade->getMoney(),
                     "tranferId" => $entidade->getId(),
                 ],
                 Response::HTTP_CREATED
@@ -55,26 +59,25 @@ class WalletController implements WalletControllerInterface
     }
 
     /**
-    /**
-     * @param \App\Http\Requests\Transactions\Users\Wallet\WalletRequest $transactionRequest
-     * @return \Illuminate\Http\JsonResponse
+     * /**
+     * @param \App\Http\Requests\Users\Wallets\WalletRequest $request
+     * @return \App\Http\Controllers\Users\Wallets\Illuminate\Http\JsonResponse
      */
-    public function balance(WalletRequest $request ): Illuminate\Http\JsonResponse
+    public function balance(WalletRequest $request ): JsonResponse
     {
-
         try {
-            $dados = $request->all();
+            $dados = $request->getParams()->all();
 
-            /** @var \App\Entities\TransferEntity $entidade */
+            /** @var WalletEntity $entidade */
             $entidade = $this->walletService->balance($dados);
 
             return response()->json(
                 [
-                    "codigo" => Response::HTTP_CREATED,
+                    "codigo" => Response::HTTP_FOUND,
                     "descricao" => "Carteira listada com sucesso.",
                     "wallet" => $entidade,
                 ],
-                Response::HTTP_CREATED
+                Response::HTTP_FOUND
             );
         } catch (\Exception $exception) {
             /** @var int $statusCode */
@@ -86,5 +89,4 @@ class WalletController implements WalletControllerInterface
                 'descricao' => 'Não foi possível obter a carteira solicitada.']);
         }
     }
-
 }

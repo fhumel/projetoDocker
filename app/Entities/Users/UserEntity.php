@@ -1,26 +1,44 @@
 <?php
 
-namespace App\Entities\Transfer;
+namespace App\Entities\Users;
 
-class UserEntity extends DefaultEntity
+class UserEntity
 {
-    /** @var string */
-    private string $email;
-
-    /** @var integer */
-    private int $walletId;
-
-    /** @var string */
-    private string $password;
-
-    /** @var string */
-    private string $cpf;
-
     /** @var integer */
     private ?int $id = null;
 
     /** @var string */
-    private string $nome;
+    private ?string $email = null;
+
+    /** @var integer */
+    private ?int $walletId = null;
+
+    /** @var string */
+    private ?string $password = null;
+
+    /** @var string */
+    private ?string $cpf = null;
+
+    /** @var string */
+    private ?string $name = null;
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return UserEntity
+     */
+    public function setName(string $name): UserEntity
+    {
+        $this->name = $name;
+        return $this;
+    }
 
     /**
      * @return int
@@ -30,12 +48,15 @@ class UserEntity extends DefaultEntity
         return $this->id;
     }
 
+
     /**
-     * @param int $id
+     * @param string|null $id
+     * @return UserEntity
      */
-    public function setId(int $id): void
+    public function setId(?string $id): UserEntity
     {
         $this->id = $id;
+        return $this;
     }
 
     /**
@@ -48,10 +69,12 @@ class UserEntity extends DefaultEntity
 
     /**
      * @param string $email
+     * @return UserEntity
      */
-    public function setEmail(string $email): void
+    public function setEmail(string $email): UserEntity
     {
         $this->email = $email;
+        return $this;
     }
 
     /**
@@ -64,10 +87,12 @@ class UserEntity extends DefaultEntity
 
     /**
      * @param int $walletId
+     * @return UserEntity
      */
-    public function setWalletId(int $walletId): void
+    public function setWalletId(int $walletId): UserEntity
     {
         $this->walletId = $walletId;
+        return $this;
     }
 
     /**
@@ -80,10 +105,12 @@ class UserEntity extends DefaultEntity
 
     /**
      * @param string $password
+     * @return UserEntity
      */
-    public function setPassword(string $password): void
+    public function setPassword(string $password): UserEntity
     {
         $this->password = $password;
+        return $this;
     }
 
     /**
@@ -95,28 +122,12 @@ class UserEntity extends DefaultEntity
     }
 
     /**
-     * @param string $cpf
+     * @param string $name
+     * @return UserEntity
      */
-    public function setCpf(string $cpf): void
+    public function setCpf(string $cpf): UserEntity
     {
         $this->cpf = $cpf;
+        return $this;
     }
-
-    /**
-     * @return string
-     */
-    public function getNome(): string
-    {
-        return $this->nome;
-    }
-
-    /**
-     * @param string $nome
-     */
-    public function setNome(string $nome): void
-    {
-        $this->nome = $nome;
-    }
-
-
 }

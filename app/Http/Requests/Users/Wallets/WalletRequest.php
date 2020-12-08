@@ -2,20 +2,21 @@
 
 namespace App\Http\Requests\Users\Wallets;
 
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class WalletRequest extends DefaultRequest
+class WalletRequest extends Controller
 {
-    /** @var array|string[] */
-    protected array $regras = [
-        'value' => 'required|decimal(9,3)',
-        'payer' => 'required|integer',
-        'payee' => 'required|integer',
-    ];
+    public function __construct(Request $request)
+    {
+        $this->validate(
+            $request, [
+                'id' => 'integer',
+                'money' => 'regex:/^\d+(\.\d{1,2})?$/',
+                'type' => 'string',
+            ]
+        );
 
-    /** @var array|string[] */
-    protected array $mensagens = [
-        'value.required' => "Este campo ':attribute' e obrigatorio",
-        'payer.required' => "Este campo ':attribute' e obrigatorio",
-        'payee.required' => "Este campo ':attribute' e obrigatorio"
-    ];
+        parent::__construct($request);
+    }
 }

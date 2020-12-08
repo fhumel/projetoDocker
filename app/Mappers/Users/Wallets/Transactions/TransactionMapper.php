@@ -2,14 +2,17 @@
 
 namespace App\Mappers\Users\Wallets\Transactions;
 
+use App\Contracts\Users\Wallets\Transactions\Mappers\TransactionMapperInterface;
+use App\Entities\Users\Wallets\Transactions\TransactionEntity;
+
 class TransactionMapper implements TransactionMapperInterface
 {
-    /** @var \App\Entities\Users\Wallets\Transactions\Transactionsntity */
+    /** @var TransactionEntity */
     private $transactionEntity;
 
     /**
      * TransactionMapper constructor.
-     * @param \App\Entities\Users\Wallets\Transactions\TransactionEntity $transactionEntity
+     * @param TransactionEntity $transactionEntity
      */
     public function __construct(TransactionEntity $transactionEntity)
     {
@@ -18,11 +21,10 @@ class TransactionMapper implements TransactionMapperInterface
 
     /**
      * @param array $dados
-     * @return \App\Entities\DefaultEntityInterface
      * @throws \App\Exceptions\InvalidDocumentException
      * @throws \App\Exceptions\InvalidEmailException
      */
-    public function map(array $dados): DefaultEntityInterface
+    public function map(array $dados): TransactionEntity
     {
         $transactionEntity = clone $this->walletTypeEntity;
         isset($dados['id']) ? $transactionEntity->setId($dados['id']) : $transactionEntity->setId(null);
@@ -34,10 +36,10 @@ class TransactionMapper implements TransactionMapperInterface
     }
 
     /**
-     * @param \App\Entities\Users\Wallets\Transactions\TransactionEntity $transactionEntity
+     * @param TransactionEntity $transactionEntity
      * @return array
      */
-    public function revert(DefaultEntityInterface $transactionEntity): array
+    public function revert($transactionEntity): array
     {
         return [
             'id' => $transactionEntity->getId(),

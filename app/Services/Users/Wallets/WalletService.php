@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Services\Wallets;
+namespace App\Services\Users\Wallets;
 
-use App\Services\Wallets\WalletServiceInterface;
+use App\Contracts\Users\Wallets\Repositories\WalletRepositoryInterface;
+use App\Contracts\Users\Wallets\Services\WalletServiceInterface;
+use App\Entities\Users\Wallets\WalletEntity;
+use App\Models\Users\Wallets\Wallet;
 use Illuminate\Support\Collection;
 
 class WalletService implements WalletServiceInterface
@@ -25,9 +28,16 @@ class WalletService implements WalletServiceInterface
     /**
      * @inheritDoc
      */
-    public function transfer($dados): Collection
+    public function balance($dados): array
     {
-        return $this->walletRepository->transfer();
+        return $this->walletRepository->balance($dados);
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function deposit($dados): WalletEntity
+    {
+        return $this->walletRepository->deposit($dados);
+    }
 }

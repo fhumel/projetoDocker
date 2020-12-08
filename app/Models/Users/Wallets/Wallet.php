@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Wallets;
+namespace App\Models\Users\Wallets;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,9 +11,9 @@ class Wallet extends Model
      *
      * @var array
      */
-    protected $table = [ 'wallets' ];
+    protected $table = 'wallets';
 
     protected $fillable = [
-        'id', 'userId', 'money', 'type'
+        'id', 'money', 'type'
     ];
 }

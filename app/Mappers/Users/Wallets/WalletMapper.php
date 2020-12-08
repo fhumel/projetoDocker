@@ -2,7 +2,10 @@
 
 namespace App\Mappers\Users\Wallets;
 
-class WalletMapper implements TransferMapperInterface
+use App\Contracts\Users\Wallets\Mappers\WalletMapperInterface;
+use App\Entities\Users\Wallets\WalletEntity;
+
+class WalletMapper implements WalletMapperInterface
 {
     /** @var \App\Entities\Users\Wallets\WalletEntity */
     private $walletEntity;
@@ -11,24 +14,23 @@ class WalletMapper implements TransferMapperInterface
      * UserMapper constructor.
      * @param \App\Entities\Users\Wallets\WalletEntity $walletEntity
      */
-    public function __construct(Wallets\WalletEntity $walletEntity)
+    public function __construct(WalletEntity $walletEntity)
     {
         $this->walletEntity = $walletEntity;
     }
 
     /**
      * @param array $dados
-     * @return \App\Entities\DefaultEntityInterface
      * @throws \App\Exceptions\InvalidDocumentException
      * @throws \App\Exceptions\InvalidEmailException
      */
-    public function map(array $dados): DefaultEntityInterface
+    public function map(array $dados): WalletEntity
     {
         $walletEntity = clone $this->walletEntity;
         isset($dados['id']) ? $walletEntity->setId($dados['id']) : $walletEntity->setId(null);
         $walletEntity
-            ->setName($dados['money'])
-            ->setUserId($dados['userId']);
+            ->setMoney($dados['money'])
+            ->setType($dados['type']);
         return $walletEntity;
     }
 

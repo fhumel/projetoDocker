@@ -2,12 +2,13 @@
 
 namespace App\Providers\Users;
 
+
 use App\Contracts\Users\Mappers\UserMapperInterface;
 use App\Contracts\Users\Repositories\UserRepositoryInterface;
 use App\Contracts\Users\Services\UserServiceInterface;
 use App\Mappers\Users\Factories\UserMapperFactory;
-use App\Repositories\UserRepositoryFactory;
-use App\Services\Users\UserServiceFactory;
+use App\Repositories\Users\Factories\UserRepositoryFactory;
+use App\Services\Users\Factories\UserServiceFactory;
 use Illuminate\Support\ServiceProvider;
 
 class UserServiceProvider extends ServiceProvider

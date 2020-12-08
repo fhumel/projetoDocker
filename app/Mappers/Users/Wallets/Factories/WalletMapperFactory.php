@@ -10,6 +10,6 @@ class WalletMapperFactory
     public function __invoke(): WalletMapper
     {
         $walletEntity = app(WalletEntity::class);
-        return new WalletEntity($walletEntity);
+        return new WalletMapper($walletEntity);
     }
 }

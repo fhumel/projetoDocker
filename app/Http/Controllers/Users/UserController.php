@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Users;
 
+use App\Contracts\Users\Mappers\UserMapperInterface;
+use App\Contracts\Users\Services\UserServiceInterface;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\UserRequest;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-class UserController extends UserControllerInterface
+class UserController extends Controller
 {
 
     /** @var \App\Contracts\Users\Services\UserServiceInterface */
@@ -30,15 +34,13 @@ class UserController extends UserControllerInterface
     /**
      * @inheritDoc
      */
-    public function create(UserRequest $request): Illuminate\Http\JsonResponse
+    public function create(UserRequest $request): JsonResponse
     {
-
         try {
+            $dados = $request->getParams()->all();
 
-            $dados = $request->all();
-
-            /** @var \App\Entities\TransferEntity $entidade */
-            $entidade = $this->transferService->create($dados);
+            /** @var \App\Entities\Users\UserEntity $entidade */
+            $entidade = $this->userService->register($dados);
 
             return response()->json(
                 [
@@ -61,21 +63,17 @@ class UserController extends UserControllerInterface
     /**
      * @inheritDoc
      */
-    public function list(): Illuminate\Http\JsonResponse
+    public function list(): JsonResponse
     {
-
         try {
-
-            /** @var \App\Entities\TransferEntity $entidade */
+            /** @var \App\Entities\Users\UserEntity $entidade */
             $colecao = $this->userService->list();
 
-            return response()->json(
-                [
-                    $colecao
-                ],
+            return response()->json($colecao,
                 Response::HTTP_FOUND
             );
         } catch (\Exception $exception) {
+            dd($exception->getMessage());
             /** @var int $statusCode */
             $statusCode = $exception instanceof HttpException
                 ? $exception->getStatusCode() : Response::HTTP_BAD_REQUEST;

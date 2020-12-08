@@ -92,8 +92,8 @@ $app->withFacades();
 */
 
 $app->register(App\Providers\Users\UserServiceProvider::class);
-$app->register(App\Providers\Wallets\WalletServiceProvider::class);
-$app->register(App\Providers\Wallets\Transactions\TransactionServiceProvider::class);
+$app->register(App\Providers\Users\Wallets\WalletServiceProvider::class);
+$app->register(App\Providers\Users\Wallets\Transactions\TransactionServiceProvider::class);
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);

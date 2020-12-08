@@ -1,21 +1,27 @@
 <?php
 
-namespace App\Repositories\Wallets;
+namespace App\Repositories\Users\Wallets\Factories;
 
-use App\Mappers\Wallets\WalletMapperInterface;
+use App\Contracts\Users\Wallets\Mappers\WalletMapperInterface;
+use App\Repositories\Users\Wallets\WalletRepository;
+use App\Models\Users\Wallets\Wallet;
 
 class WalletRepositoryFactory
 {
     /**
-     * @return \App\Repositories\Wallets\WalletRepository
+     * @return WalletRepository
      */
     public function __invoke()
     {
-        /** @var \Api\Mappers\Wallets\WalletMapperInterface $mapper */
+        /** @var \App\Contracts\Users\Wallets\Mappers\WalletMapperInterface $mapper */
         $mapper = app(WalletMapperInterface::class);
 
+        /** @var User $walletModel */
+        $walletModel = app(Wallet::class);
+
         return new WalletRepository(
-            $mapper
+            $mapper,
+            $walletModel
         );
     }
 }

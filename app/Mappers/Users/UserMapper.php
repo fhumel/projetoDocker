@@ -3,6 +3,7 @@
 namespace App\Mappers\Users;
 
 use App\Contracts\Users\Mappers\UserMapperInterface;
+use App\Entities\Users\UserEntity;
 
 class UserMapper implements UserMapperInterface
 {
@@ -20,20 +21,18 @@ class UserMapper implements UserMapperInterface
 
     /**
      * @param array $dados
-     * @return \App\Entities\DefaultEntityInterface
      * @throws \App\Exceptions\InvalidDocumentException
      * @throws \App\Exceptions\InvalidEmailException
      */
-    public function map(array $dados): DefaultEntityInterface
+    public function map(array $dados): UserEntity
     {
         $userEntity = clone $this->userEntity;
-        isset($dados['id']) ? $userEntity->setId($dados['id']) : $userEntity->setId(null);
+        isset($dados['id']) ? $userEntity->setId($dados['id']) : '';
         $userEntity
-            ->setWalletId($dados['walletId'])
+            ->setWalletId($dados['wallet_id'])
             ->setName($dados['name'])
             ->setCpf($dados['cpf'])
-            ->setEmail($dados['email'])
-            ->setPassword($dados['password']);
+            ->setEmail($dados['email']);
         return $userEntity;
     }
 
@@ -41,14 +40,16 @@ class UserMapper implements UserMapperInterface
      * @param \App\Entities\Users\UserEntity $userEntity
      * @return array
      */
-    public function revert(DefaultEntityInterface $userEntity): array
+    public function revert($userEntity): array
     {
+        dd($userEntity);
+
         return [
             'id' => $userEntity->getId(),
             'cpf' => $userEntity->getCpf(),
             'name' => $userEntity->getName(),
             'email' => $userEntity->getEmail(),
-            'walletId' => $userEntity->getWalletId()
+            'wallet_id' => $userEntity->getWalletId()
         ];
     }
 }

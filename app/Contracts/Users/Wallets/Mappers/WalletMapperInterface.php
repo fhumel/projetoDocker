@@ -2,6 +2,6 @@
 
 namespace App\Contracts\Users\Wallets\Mappers;
 
-interface WalletMapperInterface extends DefaultMapperInterface
+interface WalletMapperInterface
 {
 }

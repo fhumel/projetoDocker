@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entities\Transfer;
+namespace App\Entities\Users\Wallets\Transactions;
 
-class TransactionEntity extends DefaultEntity
+class TransactionEntity
 {
     /** @var integer */
     private ?int $id = null;

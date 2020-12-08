@@ -1,48 +1,33 @@
 <?php
 
-namespace App\Repositories\Transactions;
+namespace App\Repositories\Users\Wallets\Transactions;
 
+use App\Contracts\Users\Wallets\Transactions\Repositories\TransactionRepositoryInterface;
 use App\Mappers\Transactions\TransactionMapper;
 use App\Mappers\Transactions\TransactionMapperInterface;
+use App\Models\Users\Wallets\Transactions\Transaction;
 use Illuminate\Support\Collection;
 
 class TransactionRepository implements TransactionRepositoryInterface
 {
-
-    /** @var \Api\Mappers\Transactions\TransactionMapperInterface */
-    protected \Api\Mappers\Transactions\TransactionMapperInterface $mapperAdapter;
-
     /**
      * @inheritDoc
      */
-    public function mapear(array $dados)
+    public function list(): array
     {
-        $transferEntidadeClone = clone $this->entidade;
-        return $this->mapperAdapter->obterMapa($dados, $transferEntidadeClone);
+
+        $transactions = Transaction::all();
+
+        return $transactions->toArray();
     }
+
     /**
      * @inheritDoc
      */
-    public function transfer(array $id): Collection
+    public function pay(array $dados): array
     {
-        /** @var \Illuminate\Database\Eloquent\Builder $queryBuilder */
-        $queryBuilder = ($this->model->newQuery());
-
-//        /** @var \Illuminate\Database\Eloquent\Collection $ticket */
-//        $ticket = $queryBuilder
-//            ->with(
-//                [
-//                    'comentarios',
-//                    'encomenda',
-//                    'observacoes',
-//                    'categoria',
-//                    'assunto',
-//                    'nivel',
-//                ]
-//            )
-//            ->findOrFail($id);
-//
-//        return $this->mapear($ticket->toArray());
+        dd($dados);
+        //update wallet do payee adicionando valor
     }
 
 }

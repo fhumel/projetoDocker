@@ -1,22 +1,27 @@
 <?php
 
-namespace App\Services\Transactions;
+namespace App\Services\Users\Wallets\Transactions\Factories;
 
-use App\Repositories\TransactionRepositoryInterface;
-use App\Services\TransactionService;
+use App\Contracts\Users\Wallets\Repositories\WalletRepositoryInterface;
+use App\Contracts\Users\Wallets\Transactions\Repositories\TransactionRepositoryInterface;
+use App\Services\Users\Wallets\Transactions\TransactionService;
 
 class TransactionServiceFactory
 {
     /**
-     * @return \Api\Services\Transactions\TransferServiceFactory
+     * @return TransactionService
      */
     public function __invoke()
     {
-        /** @var \Api\Repositories\Transactions\TransactionRepositoryInterface $transactionRepository */
+        /** @var TransactionRepositoryInterface $transactionRepository */
         $transactionRepository = app(TransactionRepositoryInterface::class);
 
+        /** @var \App\Contracts\Users\Wallets\Repositories\WalletRepositoryInterface $walletRepository */
+        $walletRepository = app(WalletRepositoryInterface::class);
+
         return new TransactionService(
-            $transactionRepository
+            $transactionRepository,
+            $walletRepository
         );
     }
 }
