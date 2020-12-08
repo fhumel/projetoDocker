@@ -14,12 +14,11 @@ class ContaSeeder extends DatabaseSeeder
      */
     public function run()
     {
-        Conta::create([
-            'tipo'      => 'Comum',
+        Conta::create([            'type'      => 'comum',
         ]);
 
         Conta::create([
-            'tipo'      => 'Logista',
+            'type'      => 'logista',
         ]);
     }
 }

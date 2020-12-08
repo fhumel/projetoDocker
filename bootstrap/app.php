@@ -23,10 +23,6 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-// $app->withFacades();
-
-// $app->withEloquent();
-
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
@@ -61,6 +57,10 @@ $app->singleton(
 
 $app->configure('app');
 
+$app->withEloquent();
+
+$app->withFacades();
+
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -91,6 +91,9 @@ $app->configure('app');
 |
 */
 
+$app->register(App\Providers\Users\UserServiceProvider::class);
+$app->register(App\Providers\Users\Wallets\WalletServiceProvider::class);
+$app->register(App\Providers\Users\Wallets\Transactions\TransactionServiceProvider::class);
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
@@ -109,7 +112,7 @@ $app->configure('app');
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
 ], function ($router) {
-    require __DIR__.'/../routes/web.php';
+    require __DIR__.'/../routes/api.php';
 });
 
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
