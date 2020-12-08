@@ -14,8 +14,7 @@ class ContaSeeder extends DatabaseSeeder
      */
     public function run()
     {
-        Conta::create([
-            'type'      => 'comum',
+        Conta::create([            'type'      => 'comum',
         ]);
 
         Conta::create([
