@@ -50,6 +50,8 @@ class UserController extends Controller
                 Response::HTTP_CREATED
             );
         } catch (\Exception $exception) {
+
+            dd($exception);
             /** @var int $statusCode */
             $statusCode = $exception instanceof HttpException
                 ? $exception->getStatusCode() : Response::HTTP_BAD_REQUEST;

@@ -22,6 +22,9 @@ class UserEntity
     /** @var string */
     private ?string $name = null;
 
+    /** @var integer */
+    private ?string $type = null;
+
     /**
      * @return string
      */
@@ -37,6 +40,24 @@ class UserEntity
     public function setName(string $name): UserEntity
     {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getType(): integer
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param integer $type
+     * @return UserEntity
+     */
+    public function setType(string $type): UserEntity
+    {
+        $this->type = $type;
         return $this;
     }
 

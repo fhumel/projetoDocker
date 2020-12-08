@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->bigInteger('wallet_id')->unsigned()->index();
+            $table->integer('type');
             $table->foreign('wallet_id')
                 ->references('id')
                 ->on('wallets')

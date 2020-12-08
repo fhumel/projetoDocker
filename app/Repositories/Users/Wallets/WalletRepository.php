@@ -60,11 +60,58 @@ class WalletRepository implements WalletRepositoryInterface
     /**
      * @inheritDoc
      */
+    public function withdrawn(array $dados): Wallet
+    {
+
+        $dados = $this->walletMapper->map($dados);
+
+        $id = $dados->getId();
+        $money = $dados->getMoney();
+        $moneyRemove = number_format($money, 2);
+
+        $wallet = Wallet::find($id);
+        $moneyWallet = number_format($wallet->money, 2);
+
+        if ($moneyWallet < $moneyRemove ) {
+            abort(
+                \Symfony\Component\HttpFoundation\Response::HTTP_BAD_REQUEST,
+                'Voce não possui saldo para tranferir.'
+            );
+        }
+
+        $amount = $moneyWallet - $moneyRemove;
+
+        DB::table('wallets')
+            ->where('id', $id)
+            ->update(['money' => $amount]);
+
+
+        return $wallet;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function balance($id): array
     {
 
         $wallet = Wallet::find($id['id']);
 
         return $wallet->toArray();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function create(array $dados): Wallet
+    {
+
+        $wallet = Wallet::create($dados);
+
+        if (!$wallet) {
+            throw new \Exception();
+        }
+
+        return $wallet;
     }
 }
